@@ -85,8 +85,9 @@ class Controller(object):
 
         self.model.prepare_sandwich(size_selected_option)
 
-        self.view.display_size_options()
+        self.view.display_options_menu()
         self.view.display_request_ingredient_message()
+        
         user_wish_ingredient = True
         while user_wish_ingredient:
             ingredient_selected_option = input()
@@ -98,6 +99,7 @@ class Controller(object):
             else:
                 self.view.display_error_message()
                 self.display_request_ingredient_message()
+
         self.view.display_created_sandwich(self.model.get_current_sandwich())
         self.model.add_sandwich_to_order()
         self.view.display_finish_message()
