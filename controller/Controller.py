@@ -24,4 +24,4 @@ class Controller(object):
         self.__model = value
     
     def start(self):
-        self.view.display_wellcome_message()
+        pass
