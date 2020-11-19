@@ -1,4 +1,4 @@
-from Sandwich import Sandwich
+from model.Sandwich import Sandwich
 
 class Order(object):
 

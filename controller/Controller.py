@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import *
+from view import View,WelcomeView,OrderView
 from sys import exit
 
 class Controller(object):
@@ -48,7 +48,7 @@ class Controller(object):
     
     def welcome(self):
         options = {'o' : 'Ordenar', 'q' : 'Salir'}
-        self.__initiate_view(WelcomeView(options))
+        self.__initiate_view(WelcomeView.WelcomeView(options))
 
         user_input = self.__read_option(options)
 
@@ -59,17 +59,17 @@ class Controller(object):
         
     def order_menu(self):
         options = {'a' : 'Agregar Sandwich','c' : 'Clonar Sandwich','m' : 'Modificar Sandwich','p' : 'Pagar','q' : 'Salir'}
-        self.__initiate_view(OrderView(options))
+        self.__initiate_view(OrderView.OrderView(options))
 
         user_input = self.__read_option(options)
 
         if user_input == 'a':
             self.welcome()
-        elif user_input == 'c'
+        elif user_input == 'c':
             self.welcome()
-        elif user_input == 'm'
+        elif user_input == 'm':
             self.welcome()
-        elif user_input == 'p'
+        elif user_input == 'p':
             self.welcome()
         else:
             self.welcome()

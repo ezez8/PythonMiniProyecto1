@@ -1,4 +1,4 @@
-from View import View
+from view.View import View
 
 class OrderView(View):
     def __init__(self, options: dict):

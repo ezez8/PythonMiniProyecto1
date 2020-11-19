@@ -1,6 +1,6 @@
-from order import Order
-from sandwich import Sandwich
-from size import Size
+from model.Order import Order
+from model.Sandwich import Sandwich
+from model.Size import Size
 class Model(object):
     
     def __init__(self):

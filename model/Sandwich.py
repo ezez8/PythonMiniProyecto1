@@ -1,5 +1,5 @@
-from Size import Size
-from Ingredient import Ingredient
+from model.Size import Size
+from model.Ingredient import Ingredient
 
 class Sandwich(object):
     def __init__(self):
