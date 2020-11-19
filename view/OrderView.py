@@ -1,8 +1,8 @@
 from View import View
 
 class OrderView(View):
-    def __init__(self, options: list):
-        super().__init__({'a' : 'Agregar Sandwich','c' : 'Clonar Sandwich','m' : 'Modificar Sandwich','p' : 'Pagar','q' : 'Salir'})
+    def __init__(self, options: dict):
+        super().__init__(options)
 
     def display_main_message(self):
         print('**************************')

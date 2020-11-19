@@ -1,8 +1,8 @@
 from View import View
 
 class WelcomeView(View):
-    def __init__(self):
-        super().__init__({'o' : 'Ordenar', 'q' : 'Salir'})
+    def __init__(self, options : dict):
+        super().__init__(options)
 
     def display_main_message(self):
         print('**************************')
