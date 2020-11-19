@@ -58,12 +58,14 @@ class Controller(object):
             self.end_program()
         
     def order_menu(self):
-        options = {'a' : 'Agregar Sandwich','c' : 'Clonar Sandwich','m' : 'Modificar Sandwich','p' : 'Pagar','q' : 'Salir'}
+        options = {'a' : 'Agregar Sandwich','e' : 'Eliminar Sandwich','c' : 'Clonar Sandwich','m' : 'Modificar Sandwich','p' : 'Pagar','q' : 'Salir'}
         self.__initiate_view(OrderView.OrderView(options))
 
         user_input = self.__read_option(options)
 
         if user_input == 'a':
+            self.welcome()
+        elif user_input == 'e':
             self.welcome()
         elif user_input == 'c':
             self.welcome()
