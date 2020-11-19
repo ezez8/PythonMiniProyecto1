@@ -6,7 +6,7 @@ class AddSandwichView(View):
         super().__init__(options)
     
     def display_size_options(self):
-        print('Tamaños :')
+        print('\nTamaños :')
         for command,option in self.size_options.items():
             print(f'( {command} )    {option}')
 
@@ -23,6 +23,12 @@ class AddSandwichView(View):
 
     def display_request_message(self):
         print('Indique una opcion para continuar: ', end='')
+    
+    def display_request_ingredient_message(self):
+        print('\nIndique ingrediente (enter para terminar): ', end='')
+    
+    def display_finish_message(self):
+        print('Presione ENTER para continuar: ', end='')
 
     def display_error_message(self):
         print('=> Debe ingresar una opcion valida')

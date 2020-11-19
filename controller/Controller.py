@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import View,WelcomeView,OrderView
+from view import View,WelcomeView,OrderView,AddSandwichView
 from sys import exit
 
 class Controller(object):
@@ -64,7 +64,7 @@ class Controller(object):
         user_input = self.__read_option(options)
 
         if user_input == 'a':
-            self.welcome()
+            self.add_sandwich()
         elif user_input == 'e':
             self.welcome()
         elif user_input == 'c':
@@ -75,6 +75,34 @@ class Controller(object):
             self.welcome()
         else:
             self.welcome()
+    
+    def add_sandwich(self):
+        size_options = self.model.generate_available_ingredients_dict()
+        ingredient_options = self.model.generate_available_sizes_dict()
+        self.__initiate_view(AddSandwichView.AddSandwichView(ingredient_options,size_options))
+
+        size_selected_option = self.__read_option(size_options)
+
+        self.model.prepare_sandwich(size_selected_option)
+
+        self.view.display_size_options()
+        self.view.display_request_ingredient_message()
+        user_wish_ingredient = True
+        while user_wish_ingredient:
+            ingredient_selected_option = input()
+            if ingredient_selected_option in ingredient_options:
+                self.model.add_ingredient_to_sandwich(ingredient_selected_option)
+                self.display_request_ingredient_message()
+            elif ingredient_selected_option == '':
+                user_wish_ingredient = False
+            else:
+                self.view.display_error_message()
+                self.display_request_ingredient_message()
+        self.view.display_created_sandwich(self.model.get_current_sandwich())
+        self.model.add_sandwich_to_order()
+        self.view.display_finish_message()
+        input()
+        self.order_menu()
 
     def end_program(self):
         exit()
