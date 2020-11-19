@@ -1,6 +1,8 @@
 from model.Order import Order
 from model.Sandwich import Sandwich
 from model.Size import Size
+from model.Ingredient import Ingredient
+from model.Size import Size
 class Model(object):
     
     def __init__(self):
@@ -20,10 +22,35 @@ class Model(object):
         return self.__current_sandwich
 
     def load_available_ingredients(self):
-        pass
+        filepath = './../config/ingredients.txt'
+        ingredients_list = self.__read_file_lines(filepath)
+        for name,command,price in ingredients_list:
+            self.__available_ingredients.append(Ingredient(name,command,price))
 
     def load_availables_sizes(self):
-        pass
+        filepath = './../config/sizes.txt'
+        sizes_list = self.__read_file_lines(filepath)
+        for name,command,price in ingredient_list:
+            self.__available_sizes.append(Size(name,command,price))
+
+    def __read_file_lines(self, filepath : str):
+        tuple_lines = []
+        try:
+            with open(filepath) as f:
+                lines = f.readlines()
+            for line in lines:
+                line_parts = line.strip('\n').strip('\r').split(' ')
+                try:
+                    price = float(line_parts[-1])
+                    command = line_parts[-2]
+                    name = ' '.join(line_parts[0:-2])
+                    tuple_lines.append((name,command,price))
+                except :
+                    pass
+        except FileNotFoundError as e:
+            pass
+        finally:
+            return tuple_lines
 
     def generate_available_ingredients_dict(self):
         pass
@@ -37,7 +64,7 @@ class Model(object):
     def __search_available_sandwich_by_command(self, command : str) -> Sandwich:
         pass
 
-    def prepare_sandwich(self: sandwich_command : str):
+    def prepare_sandwich(self, sandwich_command : str):
         pass
     
     def add_sandwich_to_order(self, sandwich_command : str):
