@@ -42,22 +42,8 @@ class AddSandwichView(View):
         super().display_options_menu()
     
     def display_created_sandwich(self, sandwich : Sandwich):
-        size_section = sandwich.size.name
-
-        ingredients_list = [ingredient.name for ingredient in sandwich.ingredients_list]
-        number_of_ingredients = len(ingredients_list)
-        ingredients_section = ''
-        if  number_of_ingredients == 0:
-            ingredients_section = ''
-        elif number_of_ingredients == 1:
-            ingredients_section = f' con {ingredients_list[0]}'
-        else:
-            first_part = ', '.join(ingredients_list[0:-1])
-            last_part = ingredients_list[-1]
-            ingredients_section = f' con {first_part} y {last_part}'
-        
-        print(f'Usted seleccionó un sándwich {size_section}{ingredients_section}\n')
-        print(f'Subtotal a pagar por el sándwich {size_section}: {sandwich.calculate_price() : .2f}')
+        print(f'\nUsted seleccionó un sándwich {sandwich.get_full_description()}\n')
+        print(f'Subtotal a pagar por el sándwich {sandwich.get_small_description()}: {sandwich.calculate_price() : .2f}')
         print('************************************')
 
     
