@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import View,WelcomeView,OrderView,AddSandwichView,CloneSandwichView
+from view import View,WelcomeView,OrderView,AddSandwichView,CloneSandwichView,DeleteSandwichView
 from sys import exit
 
 class Controller(object):
@@ -139,24 +139,15 @@ class Controller(object):
         input()
         self.order_menu()
 
-                
-                
-                
-
-
-
-                    
-                
-
-
-        
-        
-
     def end_program(self):
         exit()
 
-    def delete_sandwich():
-        pass
+    def delete_sandwich(self):
+        options = {}
+        sandwich_list = [s.get_full_description() for s in self.model.get_order().get_sandwiches()]
+        for i in range(len(sandwich_list)):
+            options[i] = sandwich_list[i]
+        self.__initiate_view(DeleteSandwichView.DeleteSandwichView(options))    
 
 
 
