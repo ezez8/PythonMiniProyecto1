@@ -66,7 +66,7 @@ class Controller(object):
         if user_input == 'a':
             self.add_sandwich()
         elif user_input == 'e':
-            self.welcome()
+            self.delete_sandwich()
         elif user_input == 'c':
             self.clone_sandwich()
         elif user_input == 'm':
@@ -154,6 +154,9 @@ class Controller(object):
 
     def end_program(self):
         exit()
+
+    def delete_sandwich():
+        pass
 
 
 
