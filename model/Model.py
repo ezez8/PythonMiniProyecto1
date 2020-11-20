@@ -108,3 +108,9 @@ class Model(object):
 
     def obtain_total_price(self):
         return self.__order.calculate_order_price()
+
+    def generate_clone_sandwich_options_dict(self):
+        options_dict = { 'q' : 'Salir'}
+        for index,sandwich in enumerate(self.__order.get_sandwiches()):
+            options_dict[str(index + 1)] = sandwich.get_full_description()
+        return options_dict

@@ -36,7 +36,7 @@ class CloneSandwichView(View):
         
         x = self.__order.get_sandwiches()
         cont = 1
-        print('lista de sandwiches ordenas')
+        print('lista de sandwiches de la orden:\n')
         for sandwich in x:
             ingredients_list = [ingredient.name for ingredient in sandwich.ingredients_list]
             number_of_ingredients = len(ingredients_list)
