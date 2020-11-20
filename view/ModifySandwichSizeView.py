@@ -2,8 +2,8 @@ from view.View import View
 from model.Sandwich import Sandwich
 from model.Size import Size
 
-class ModyfiSandwichSizeView(View):
-    def __init__(self, options: dict):
+class ModifySandwichSizeView(View):
+    def __init__(self, options=None):
         super().__init__(options)
 
     def display_main_message(self):
@@ -21,10 +21,11 @@ class ModyfiSandwichSizeView(View):
     def start_display(self):
         self.clean_screen()
         self.display_main_message()
-        self.display_order()
-        self.display_request_message()
 
-    def display_order(self):
-        
+    def display_order(self, order: Sandwich):
+        count = 1
+        for sandwich in order:
+            print(f'( {count} ) sandwich {sandwich.get_full_description()}\n')
+            count += 1
 
     

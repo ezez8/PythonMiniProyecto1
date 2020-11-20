@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,ModyfiSandwichSizeView
+from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,ModifySandwichSizeView
 from sys import exit
 
 class Controller(object):
@@ -109,6 +109,13 @@ class Controller(object):
     def modify_sandwich(self):
         options = {'t':'Modificar Tamaño', 'i':'Modificar Ingredientes'}
         self.__initiate_view(ModifySandwichView.ModyfiSandwichView(options))
+        order = len(self.model.get_order().get_sandwiches())
+        if order == 0:
+            self.view.display_empty()
+            input()
+            self.order_menu()
+        self.view.display_option()
+        self.view.display_request_message()
         user_input = input()
         if user_input == 't':
             self.modify_sandwich_size()
@@ -117,11 +124,15 @@ class Controller(object):
         else:
             self.welcome()
 
-    def modify_sandwich_size():
-        self.__initiate_view(ModyfiSandwichSizeView.ModyfiSandwichSizeView())
-
-    def modify_sandwich_ingredients():
-
+    def modify_sandwich_size(self):
+        self.__initiate_view(ModifySandwichSizeView.ModifySandwichSizeView())
+        order = self.model.get_order().get_sandwiches()
+        self.view.display_order(order)
+        self.view.display_request_message()
+        user_input = input()
+        user_wish_modify = True
+        while user_wish_modify:
+            
 
     def end_program(self):
         exit()

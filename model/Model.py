@@ -12,6 +12,9 @@ class Model(object):
         self.__order = Order()
         self.__current_sandwich = None
         self.__current_ingredient = None
+
+    def get_order(self):
+        return self.__order
     
     def get_available_ingredients(self):
         return self.__available_ingredients
