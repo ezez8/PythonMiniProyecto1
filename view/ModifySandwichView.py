@@ -1,10 +1,9 @@
 from view.View import View
-from model.Sandwich import Sandwich
-from model.Size import Size
+from model import *
 
 class ModyfiSandwichView(View):
-    def __init__(self, options: dict):
-        super().__init__(options)
+    def __init__(self, order: Order):
+        self.__order = order
 
     def display_main_message(self):
         print('**************************')
@@ -13,7 +12,7 @@ class ModyfiSandwichView(View):
         print('Modificacion de sandwich\n')
 
     def display_request_message(self):
-        print('Indique una opcion para continuar: ', end='')
+        print('Indique el sandwich que desea modificar: ', end='')
 
     def display_error_message(self):
         print('=> Debe ingresar una opcion valida')
@@ -24,6 +23,11 @@ class ModyfiSandwichView(View):
     def start_display(self):
         self.clean_screen()
         self.display_main_message()
+        self.display_order()
 
-    def display_option(self):
-        super().display_options_menu()
+    def display_order(self):
+        count = 1
+        order = self.__order.get_sandwiches()
+        for sandwich in order:
+            print(f'( {count} ) sandwich {sandwich.get_full_description()}\n')
+            count += 1
