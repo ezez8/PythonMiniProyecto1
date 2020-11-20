@@ -25,6 +25,6 @@ class ModyfiSandwichSizeView(View):
         self.display_request_message()
 
     def display_order(self):
-
+        
 
     
