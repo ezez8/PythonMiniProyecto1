@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from os import system, name
 class View(ABC):
     def __init__(self, options : dict):
         self.options = options
@@ -27,6 +28,11 @@ class View(ABC):
         self.display_request_message()
 
     def clean_screen(self):
-        pass
+        #windows
+        if name == 'nt':
+            system('cls') 
+        #mac and linux 
+        else: 
+            system('clear')
 
         

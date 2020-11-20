@@ -20,6 +20,7 @@ class AddSandwichView(View):
         print('Creacion de sandwich\n')
     
     def start_display(self):
+        self.clean_screen()
         self.display_main_message()
         self.display_size_options()
         self.display_request_message()
