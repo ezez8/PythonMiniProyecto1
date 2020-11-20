@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,ModifySandwichSizeView,CloneSandwichView
+from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,CloneSandwichView
 from sys import exit
 
 class Controller(object):
@@ -107,22 +107,30 @@ class Controller(object):
         self.order_menu()
 
     def modify_sandwich(self):
-        options = {'t':'Modificar Tamaño', 'i':'Modificar Ingredientes'}
-        self.__initiate_view(ModifySandwichView.ModyfiSandwichView(options))
-        order = len(self.model.get_order().get_sandwiches())
-        if order == 0:
+        order = self.model.get_order()
+        self.__initiate_view(ModifySandwichView.ModyfiSandwichView(order))
+        order_len = len(self.model.get_order().get_sandwiches())
+        if order_len == 0:
             self.view.display_empty()
             input()
             self.order_menu()
-        self.view.display_option()
         self.view.display_request_message()
-        user_input = input()
-        if user_input == 't':
-            self.modify_sandwich_size()
-        elif user_input == 'i':
-            self.modify_sandwich_ingredients()
-        else:
-            self.welcome()
+        user_wish_modify = True
+        while user_wish_modify:
+            try:
+                user_input = input()
+                if int(user_input) > order_len or int(user_input) < 0:
+                    self.view.display_error_message()
+                    self.view.display_request_message()
+                elif user_input == '':
+                    self.order_menu()
+                else:
+                    self.model.get_order().remove_sandwich(int(user_input))
+                    self.add_sandwich()
+            except ValueError:
+                self.view.display_error_message()
+                self.view.display_request_message()
+                pass
 
     def modify_sandwich_size(self):
         self.__initiate_view(ModifySandwichSizeView.ModifySandwichSizeView())
@@ -131,7 +139,6 @@ class Controller(object):
         self.view.display_request_message()
         user_input = input()
         user_wish_modify = True
-        while user_wish_modify:
             
     def clone_sandwich(self):
         order = self.model.get_order()
