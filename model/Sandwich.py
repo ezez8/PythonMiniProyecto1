@@ -10,6 +10,9 @@ class Sandwich(object):
     def size(self):
         return self.__size
     
+    def get_size(self):
+        return self.size
+    
     @size.setter
     def size(self, value : Size):
         self.__size =  value
