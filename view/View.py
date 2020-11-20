@@ -18,6 +18,7 @@ class View(ABC):
     def display_options_menu(self):
         for command,option in self.options.items():
             print(f'( {command} )    {option}')
+        print()
     
     def start_display(self):
         self.clean_screen()

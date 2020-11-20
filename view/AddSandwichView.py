@@ -1,5 +1,6 @@
 from view.View import View
 from model.Sandwich import Sandwich
+from model.Size import Size
 
 class AddSandwichView(View):
     def __init__(self, ingredient_options: dict, size_options: dict):
@@ -10,6 +11,7 @@ class AddSandwichView(View):
         print('\nTamaños :')
         for command,name in self.size_options.items():
             print(f'( {command} )    {name}')
+        print()
 
     def display_main_message(self):
         print('**************************')
@@ -18,7 +20,6 @@ class AddSandwichView(View):
         print('Creacion de sandwich\n')
     
     def start_display(self):
-        print('estaaaaaaa')
         self.display_main_message()
         self.display_size_options()
         self.display_request_message()
@@ -34,13 +35,15 @@ class AddSandwichView(View):
 
     def display_error_message(self):
         print('=> Debe ingresar una opcion valida')
+
+    def display_options_menu(self):
+        print('\nLista de Ingredientes:\n')
+        super().display_options_menu()
     
     def display_created_sandwich(self, sandwich : Sandwich):
-        size_section = sandwich.get_size().name
+        size_section = sandwich.size.name
 
-        ingredients_list = []
-        for ingredient in sandwich.get_ingredients():
-            ingredients_list.append(ingredient.name)
+        ingredients_list = [ingredient.name for ingredient in sandwich.ingredients_list]
         number_of_ingredients = len(ingredients_list)
         ingredients_section = ''
         if  number_of_ingredients == 0:
@@ -53,7 +56,7 @@ class AddSandwichView(View):
             ingredients_section = f' con {first_part} y {last_part}'
         
         print(f'Usted seleccionó un sándwich {size_section}{ingredients_section}\n')
-        print(f'Subtotal a pagar por el sándwich {size_section}: {sandwich.calculate_price()}')
+        print(f'Subtotal a pagar por el sándwich {size_section}: {sandwich.calculate_price() : .2f}')
         print('************************************')
 
     

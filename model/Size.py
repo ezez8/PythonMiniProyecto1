@@ -27,7 +27,7 @@ class Size(object):
     
     @price.setter
     def price(self, value : float):
-        if value < o:
+        if value < 0:
             self.__price = 0
         else:
             self.__price = value

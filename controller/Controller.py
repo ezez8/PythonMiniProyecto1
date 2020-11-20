@@ -77,8 +77,8 @@ class Controller(object):
             self.welcome()
     
     def add_sandwich(self):
-        size_options = self.model.generate_available_ingredients_dict()
-        ingredient_options = self.model.generate_available_sizes_dict()
+        ingredient_options = self.model.generate_available_ingredients_dict()
+        size_options = self.model.generate_available_sizes_dict()
         self.__initiate_view(AddSandwichView.AddSandwichView(ingredient_options,size_options))
 
         size_selected_option = self.__read_option(size_options)
@@ -87,18 +87,18 @@ class Controller(object):
 
         self.view.display_options_menu()
         self.view.display_request_ingredient_message()
-        
+
         user_wish_ingredient = True
         while user_wish_ingredient:
             ingredient_selected_option = input()
             if ingredient_selected_option in ingredient_options:
                 self.model.add_ingredient_to_sandwich(ingredient_selected_option)
-                self.display_request_ingredient_message()
+                self.view.display_request_ingredient_message()
             elif ingredient_selected_option == '':
                 user_wish_ingredient = False
             else:
                 self.view.display_error_message()
-                self.display_request_ingredient_message()
+                self.view.display_request_ingredient_message()
 
         self.view.display_created_sandwich(self.model.get_current_sandwich())
         self.model.add_sandwich_to_order()

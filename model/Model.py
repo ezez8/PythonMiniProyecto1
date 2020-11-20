@@ -3,6 +3,7 @@ from model.Sandwich import Sandwich
 from model.Size import Size
 from model.Ingredient import Ingredient
 from model.Size import Size
+from pathlib import Path
 class Model(object):
     
     def __init__(self):
@@ -22,20 +23,19 @@ class Model(object):
         return self.__current_sandwich
 
     def load_available_ingredients(self):
-        filepath = '../config/ingredients.txt'
-        ingredients_list = self.__read_file_lines(filepath)
-        print(f'Ingrediente = {ingredients_list}')
+        base_path = Path(__file__).parent
+        file_path = (base_path / "../config/ingredients.txt").resolve()
+        ingredients_list = self.__read_file_lines(file_path)
         for name,command,price in ingredients_list:
             self.__available_ingredients.append(Ingredient(name,command,price))
-        print(self.__available_ingredients)
-
+        
     def load_availables_sizes(self):
-        filepath = '../config/sizes.txt'
-        sizes_list = self.__read_file_lines(filepath)
-        print(f'Sizes = {sizes_list}')
+        base_path = Path(__file__).parent
+        file_path = (base_path / "../config/sizes.txt").resolve()
+        sizes_list = self.__read_file_lines(file_path)
         for name,command,price in sizes_list:
             self.__available_sizes.append(Size(name,command,price))
-        print(self.__available_sizes)
+        
 
     def __read_file_lines(self, filepath : str):
         tuple_lines = []
@@ -52,7 +52,7 @@ class Model(object):
                 except :
                     pass
         except FileNotFoundError as e:
-            print(f'file {filepath} not found')
+            pass
         finally:
             return tuple_lines
 
@@ -70,12 +70,9 @@ class Model(object):
 
     def obtain_order_amount(self):
         return self.__order.calculate_order_price()
-    
-    def __search_available_sandwich_by_id(self, command : str) -> Sandwich:
-        pass
 
     def set_sandwich_size(self, size_command : str):
-        self.__current_sandwich.set_size(self.__search_available_size_by_command(size_command))
+        self.__current_sandwich.size = self.__search_available_size_by_command(size_command)
 
     def prepare_sandwich(self, size_command : str):
         self.__current_sandwich = Sandwich()
@@ -102,3 +99,6 @@ class Model(object):
 
     def add_ingredient_to_sandwich(self, ingredient_command : str):
         self.__current_sandwich.add_ingredient(self.__search_available_ingredient_by_command(ingredient_command))
+
+    def obtain_total_price(self):
+        return self.__order.calculate_order_price()
