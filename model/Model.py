@@ -22,6 +22,9 @@ class Model(object):
     def get_current_sandwich(self):
         return self.__current_sandwich
 
+    def get_order(self):
+        return self.__order
+
     def load_available_ingredients(self):
         base_path = Path(__file__).parent
         file_path = (base_path / "../config/ingredients.txt").resolve()
@@ -80,6 +83,9 @@ class Model(object):
     
     def add_sandwich_to_order(self):
         self.__order.add_sandwich(self.__current_sandwich)
+
+    def add_cloned_sandwich_to_order(self, sandwich: Sandwich):
+        self.__order.add_sandwich(sandwich)
     
     def __search_available_ingredient_by_command(self, command : str) -> Sandwich:
         ingredient = None
