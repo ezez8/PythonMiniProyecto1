@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,ModifySandwichSizeView
+from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,ModifySandwichSizeView,CloneSandwichView
 from sys import exit
 
 class Controller(object):
@@ -68,7 +68,7 @@ class Controller(object):
         elif user_input == 'e':
             self.welcome()
         elif user_input == 'c':
-            self.welcome()
+            self.clone_sandwich()
         elif user_input == 'm':
             self.modify_sandwich()
         elif user_input == 'p':
@@ -133,6 +133,38 @@ class Controller(object):
         user_wish_modify = True
         while user_wish_modify:
             
+    def clone_sandwich(self):
+        order = self.model.get_order()
+        self.__initiate_view(CloneSandwichView.CloneSandwichView(order))
+        
+        user_want_clone = True
+        
+        while user_want_clone:
+            try:
+                cont = len(self.model.get_order().get_sandwiches())
+                if cont == 0:
+                    self.view.display_empty()
+                    input()
+                    self.order_menu()
+                else:
+                    self.view.display_request_message()
+                    selected_option = input()
+                    
+                    if selected_option == '':
+                        user_want_clone = False
+                        self.order_menu()
+                    elif int(selected_option) > cont or int(selected_option) < 0:
+                        self.view.display_error_message()
+                    else:
+                        sandwich = self.model.get_order().get_sandwiches()[int(selected_option) - 1]
+                        self.model.add_cloned_sandwich_to_order(sandwich)
+                        user_want_clone = False
+            except ValueError:
+                self.view.display_error_message()
+                pass
+        self.view.display_finish_message()
+        input()
+        self.order_menu()
 
     def end_program(self):
         exit()
