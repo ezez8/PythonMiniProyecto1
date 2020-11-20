@@ -24,12 +24,19 @@ class CloneSandwichView(View):
         print('=> Debe ingresar una opcion valida')
     
     def display_finish_message(self):
-        print('Clonacion exitosa, presione ENTER para volver al menu principal: ', end='')
+        print('\n************************************')
+        print('Clonacion exitosa\n', end='')
+        print('\nPresione ENTER para continuar: ', end='')
+
+    def display_empty(self):
+        print('\nNo se encuentran sandwiches en la orden para clonar, favor agregar un sandwich primer, (presione ENTER para volver)\n')
+
 
     def display_order(self ):
-        print('lista de sandwiches ordenas')
+        
         x = self.__order.get_sandwiches()
         cont = 1
+        print('lista de sandwiches ordenas')
         for sandwich in x:
             ingredients_list = [ingredient.name for ingredient in sandwich.ingredients_list]
             number_of_ingredients = len(ingredients_list)
@@ -42,7 +49,7 @@ class CloneSandwichView(View):
                 first_part = ', '.join(ingredients_list[0:-1])
                 last_part = ingredients_list[-1]
                 ingredients_section = f' con {first_part} y {last_part}'
-            
             print(f'({cont}) Sandwich {sandwich.size.name}{ingredients_section}\n')
             cont += 1
+            
         

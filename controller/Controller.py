@@ -109,18 +109,32 @@ class Controller(object):
     def clone_sandwich(self):
         order = self.model.get_order()
         self.__initiate_view(CloneSandwichView.CloneSandwichView(order))
-        self.view.display_request_message()
+        
         user_want_clone = True
-
+        
         while user_want_clone:
-            selected_option = input()
-            cont = len(self.model.get_order().get_sandwiches())
-            if int(selected_option) > cont or int(selected_option) < 0:
+            try:
+                cont = len(self.model.get_order().get_sandwiches())
+                if cont == 0:
+                    self.view.display_empty()
+                    input()
+                    self.order_menu()
+                else:
+                    self.view.display_request_message()
+                    selected_option = input()
+                    
+                    if selected_option == '':
+                        user_want_clone = False
+                        self.order_menu()
+                    elif int(selected_option) > cont or int(selected_option) < 0:
+                        self.view.display_error_message()
+                    else:
+                        sandwich = self.model.get_order().get_sandwiches()[int(selected_option) - 1]
+                        self.model.add_cloned_sandwich_to_order(sandwich)
+                        user_want_clone = False
+            except ValueError:
                 self.view.display_error_message()
-            else:
-                sandwich = self.model.get_order().get_sandwiches()[int(selected_option) - 1]
-                self.model.add_cloned_sandwich_to_order(sandwich)
-                user_want_clone = False
+                pass
         self.view.display_finish_message()
         input()
         self.order_menu()
