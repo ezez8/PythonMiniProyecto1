@@ -56,3 +56,11 @@ class Sandwich(object):
             ingredients_section = f' con {first_part} y {last_part}'
         
         return f'{size_section}{ingredients_section}'
+    
+    @staticmethod
+    def duplicate_sandwich(original):
+        replica = Sandwich()
+        replica.size = original.size
+        for ingredient in original.ingredients_list:
+            replica.add_ingredient(ingredient)
+        return replica
