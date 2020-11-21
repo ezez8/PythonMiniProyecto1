@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import View,WelcomeView,OrderView,AddSandwichView,CloneSandwichView,DeleteSandwichView
+from view import View,WelcomeView,OrderView,AddSandwichView,CloneSandwichView,DeleteSandwichView,PagoView
 from sys import exit
 
 class Controller(object):
@@ -72,7 +72,7 @@ class Controller(object):
         elif user_input == 'm':
             self.welcome()
         elif user_input == 'p':
-            self.welcome()
+            self.pago()
         else:
             self.welcome()
     
@@ -167,3 +167,10 @@ class Controller(object):
                     self.view.display_error_message()
             except ValueError:
                 self.view.display_error_message()
+
+    def pago(self):
+        order = self.model.get_order()
+        self.__initiate_view(PagoView.PagoView(order))
+        self.view.display_factura()
+        self.view.display_finish_message()
+        input()
