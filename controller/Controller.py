@@ -74,7 +74,17 @@ class Controller(object):
         elif user_input == 'p':
             self.welcome()
         else:
-            self.welcome()
+            number_sandwich = self.model.get_number_sandwich_order()
+            if number_sandwich > 0:
+                self.view.display_request_exit_conformation(number_sandwich)
+                confirmation = input()
+                if confirmation == 's':
+                    self.model.reset_order()
+                    return self.welcome()
+                else:
+                    return self.order_menu()
+            return self.welcome()
+            
     
     def add_sandwich(self):
         ingredient_options = self.model.generate_available_ingredients_dict()

@@ -116,3 +116,11 @@ class Model(object):
         for index,sandwich in enumerate(self.__order.get_sandwiches()):
             options_dict[str(index + 1)] = sandwich.get_full_description()
         return options_dict
+    
+    def get_number_sandwich_order(self):
+        return self.__order.get_number_of_sandwiches()
+    
+    def reset_order(self):
+        self.__order = Order()
+        self.__current_sandwich = None
+        self.__current_ingredient = None
