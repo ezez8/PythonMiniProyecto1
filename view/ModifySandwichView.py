@@ -2,8 +2,7 @@ from view.View import View
 from model import *
 
 class ModifySandwichView(View):
-    def __init__(self, order: Order, options : dict):
-        self.__order = order
+    def __init__(self, options : dict):
         self.options = options
 
     def display_main_message(self):

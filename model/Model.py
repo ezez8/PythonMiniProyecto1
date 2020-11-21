@@ -109,5 +109,8 @@ class Model(object):
     def add_ingredient_to_sandwich(self, ingredient_command : str):
         self.__current_sandwich.add_ingredient(self.__search_available_ingredient_by_command(ingredient_command))
 
+    def add_ingredient_to_specific_sandwich(self, ingredient_command:str, sandwich: Sandwich):
+        sandwich.add_ingredient(self.__search_available_ingredient_by_command(ingredient_command))
+
     def obtain_total_price(self):
         return self.__order.calculate_order_price()
