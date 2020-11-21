@@ -105,12 +105,29 @@ class Controller(object):
         self.view.display_finish_message()
         input()
         self.order_menu()
+    
+    def add_ingredient(self):
+        print("pruebas")
+
+    def delete_ingredient(self):
+        print("pruebas")
 
     def modify_sandwich(self):
         options = {'a' : 'Agregar Ingrediente','q' : 'Quitar Ingrediente','m' : 'Modificar Tamaño','s' : 'Salir'}
         order = self.model.get_order()
         self.__initiate_view(ModifySandwichView.ModifySandwichView(order, options))
-        
+        user_input = input()
+        if user_input == 'a':
+            self.add_ingredient()
+        elif user_input == 'q':
+            self.delete_ingredient()
+        elif user_input == 'm'
+            self.welcome()
+        elif user_input == 's':
+            self.order_menu()
+        else:
+            self.order_menu()
+
 
 
         """ order = self.model.get_order()
