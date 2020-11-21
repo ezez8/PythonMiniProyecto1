@@ -1,9 +1,10 @@
 from view.View import View
 from model import *
 
-class ModyfiSandwichView(View):
-    def __init__(self, order: Order):
+class ModifySandwichView(View):
+    def __init__(self, order: Order, options : dict):
         self.__order = order
+        self.options = options
 
     def display_main_message(self):
         print('**************************')
@@ -23,7 +24,10 @@ class ModyfiSandwichView(View):
     def start_display(self):
         self.clean_screen()
         self.display_main_message()
-        self.display_order()
+        self.display_options_menu()
+
+    def display_options_menu(self):
+        super().display_options_menu()
 
     def display_order(self):
         count = 1

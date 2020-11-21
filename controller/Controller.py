@@ -107,7 +107,13 @@ class Controller(object):
         self.order_menu()
 
     def modify_sandwich(self):
+        options = {'a' : 'Agregar Ingrediente','q' : 'Quitar Ingrediente','m' : 'Modificar Tamaño','s' : 'Salir'}
         order = self.model.get_order()
+        self.__initiate_view(ModifySandwichView.ModifySandwichView(order, options))
+        
+
+
+        """ order = self.model.get_order()
         self.__initiate_view(ModifySandwichView.ModyfiSandwichView(order))
         order_len = len(self.model.get_order().get_sandwiches())
         if order_len == 0:
@@ -130,15 +136,7 @@ class Controller(object):
             except ValueError:
                 self.view.display_error_message()
                 self.view.display_request_message()
-                pass
-
-    def modify_sandwich_size(self):
-        self.__initiate_view(ModifySandwichSizeView.ModifySandwichSizeView())
-        order = self.model.get_order().get_sandwiches()
-        self.view.display_order(order)
-        self.view.display_request_message()
-        user_input = input()
-        user_wish_modify = True
+                pass """
             
     def clone_sandwich(self):
         order = self.model.get_order()
