@@ -22,3 +22,6 @@ class Order(object):
         for sandwich in self.__sandwiches:
             price += sandwich.calculate_price()
         return price
+    
+    def get_number_of_sandwiches(self):
+        return len(self.__sandwiches)

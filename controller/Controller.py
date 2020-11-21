@@ -74,7 +74,17 @@ class Controller(object):
         elif user_input == 'p':
             self.pago()
         else:
-            self.welcome()
+            number_sandwich = self.model.get_number_sandwich_order()
+            if number_sandwich > 0:
+                self.view.display_request_exit_conformation(number_sandwich)
+                confirmation = input()
+                if confirmation == 's':
+                    self.model.reset_order()
+                    return self.welcome()
+                else:
+                    return self.order_menu()
+            return self.welcome()
+            
     
     def add_sandwich(self):
         ingredient_options = self.model.generate_available_ingredients_dict()
@@ -102,42 +112,37 @@ class Controller(object):
 
         self.view.display_created_sandwich(self.model.get_current_sandwich())
         self.model.add_sandwich_to_order()
-        self.view.display_finish_message()
-        input()
-        self.order_menu()
+        
+        final_option = input().lower()
+        if final_option == 's':
+            return self.add_sandwich()
+        return self.order_menu()
 
     def clone_sandwich(self):
-        order = self.model.get_order()
-        self.__initiate_view(CloneSandwichView.CloneSandwichView(order))
-        
-        user_want_clone = True
-        
-        while user_want_clone:
-            try:
-                cont = len(self.model.get_order().get_sandwiches())
-                if cont == 0:
-                    self.view.display_empty()
-                    input()
-                    self.order_menu()
-                else:
-                    self.view.display_request_message()
-                    selected_option = input()
-                    
-                    if selected_option == '':
-                        user_want_clone = False
-                        self.order_menu()
-                    elif int(selected_option) > cont or int(selected_option) < 0:
-                        self.view.display_error_message()
+        sandwich_options = self.model.generate_sandwich_options_dict()
+        self.__initiate_view(CloneSandwichView.CloneSandwichView(sandwich_options))
+
+        if len(sandwich_options) == 1:
+            input()
+        else:
+            user_input = self.__read_option(sandwich_options)
+
+            if user_input == 'q':
+                return self.order_menu()
+            else:
+                sandwich_index = int(user_input) - 1
+                number_copy =  None
+                while not number_copy:
+                    self.view.display_request_quantity()
+                    user_input = input()
+                    if user_input.isdigit():
+                        number_copy = int(user_input) if int(user_input) > 0 else None
                     else:
-                        sandwich = self.model.get_order().get_sandwiches()[int(selected_option) - 1]
-                        self.model.add_cloned_sandwich_to_order(sandwich)
-                        user_want_clone = False
-            except ValueError:
-                self.view.display_error_message()
-                pass
-        self.view.display_finish_message()
-        input()
-        self.order_menu()
+                        self.view.display_error_message()
+                self.model.add_cloned_sandwich_to_order(sandwich_index,number_copy)
+                self.view.display_finish_message()
+                input()
+        return self.order_menu()
 
     def end_program(self):
         exit()
