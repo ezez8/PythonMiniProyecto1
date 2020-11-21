@@ -139,7 +139,7 @@ class Controller(object):
     def select_ingredient(self,selected_sanwich):
         ingredient_options = self.model.generate_available_ingredients_dict()
         self.view.display_options_menu()
-        self.view.display_request_ingredient_message()
+        self.view.display_request_message()
         user_wish_ingredient = True
         while user_wish_ingredient:
             ingredient_selected_option = input()
