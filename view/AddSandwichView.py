@@ -44,6 +44,7 @@ class AddSandwichView(View):
     def display_created_sandwich(self, sandwich : Sandwich):
         print(f'\nUsted seleccionó un sándwich {sandwich.get_full_description()}\n')
         print(f'Subtotal a pagar por el sándwich {sandwich.get_small_description()}: {sandwich.calculate_price() : .2f}')
-        print('************************************')
+        print('\n************************************')
+        print('¿Desea agregar otro sándwich a la orden [s / n]?: ',end='')
 
     
