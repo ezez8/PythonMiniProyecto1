@@ -143,11 +143,27 @@ class Controller(object):
         exit()
 
     def delete_sandwich(self):
-        options = {}
-        sandwich_list = [s.get_full_description() for s in self.model.get_order().get_sandwiches()]
-        for i in range(len(sandwich_list)):
-            options[i] = sandwich_list[i]
-        self.__initiate_view(DeleteSandwichView.DeleteSandwichView(options))    
+        order = self.model.get_order()
+        self.__initiate_view(DeleteSandwichView.DeleteSandwichView(order))
+        while True:
+            self.view.display_order()            
 
+            if not len(order.get_sandwiches()):
+                self.view.display_empty()
+                self.view.display_empty_msg()
+                input()
+                self.order_menu()
 
+            self.view.display_request_message()
+            
+            opcion = input()
+            if not opcion:
+                self.order_menu()
 
+            try:
+                if int(opcion) in range(1,len(order.get_sandwiches())+1):
+                    order.remove_sandwich(int(opcion))
+                else:
+                    self.view.display_error_message()
+            except ValueError:
+                self.view.display_error_message()

@@ -15,7 +15,7 @@ class Order(object):
         self.__sandwiches.append(sandwich)
     
     def remove_sandwich(self, id : int):
-        pass
+        del self.__sandwiches[id-1]
 
     def calculate_order_price(self):
         price = 0
