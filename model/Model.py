@@ -84,8 +84,10 @@ class Model(object):
     def add_sandwich_to_order(self):
         self.__order.add_sandwich(self.__current_sandwich)
 
-    def add_cloned_sandwich_to_order(self, sandwich: Sandwich):
-        self.__order.add_sandwich(sandwich)
+    def add_cloned_sandwich_to_order(self, sandwich_index: int, number_copy: int):
+        sandwich_to_copy = self.__order.get_sandwiches()[sandwich_index]
+        for _ in range(number_copy):
+            self.__order.add_sandwich(Sandwich.duplicate_sandwich(sandwich_to_copy))
     
     def __search_available_ingredient_by_command(self, command : str) -> Sandwich:
         ingredient = None
@@ -109,7 +111,7 @@ class Model(object):
     def obtain_total_price(self):
         return self.__order.calculate_order_price()
 
-    def generate_clone_sandwich_options_dict(self):
+    def generate_sandwich_options_dict(self):
         options_dict = { 'q' : 'Salir'}
         for index,sandwich in enumerate(self.__order.get_sandwiches()):
             options_dict[str(index + 1)] = sandwich.get_full_description()
