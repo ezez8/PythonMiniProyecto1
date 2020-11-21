@@ -27,7 +27,9 @@ class PagoView(View):
         print('*'*62)
         sandwiches_list = [(s.get_full_description(),s.calculate_price()) for s in self.__order.get_sandwiches()]
         for sandwich_des, price in sandwiches_list:            
-            print('*{sandwich_des:.31}...{price:>25.2f}$*'.format(sandwich_des=sandwich_des, price=price))
+            print('*{sandwich_des:31.31}...{price:>25.2f}$*'.format(sandwich_des=sandwich_des, price=price))
+        print('*'*62)
+        print('*Total{total:>54.2f}$*'.format(total=self.__order.calculate_order_price()))
         print('*'*62)
 
     def display_finish_message(self):

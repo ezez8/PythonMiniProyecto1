@@ -16,7 +16,7 @@ class DeleteSandwichView(View):
         self.display_main_message()
     
     def display_request_message(self):
-        print('Indique una opcion para continuar (ENTER para volver al menu): ', end='')
+        print('Indique el numero de Sandwich que desea eliminar(ENTER para volver al menu): ', end='')
 
     def display_error_message(self):
         print('=> Debe ingresar una opcion valida')
@@ -28,7 +28,9 @@ class DeleteSandwichView(View):
         print('Presione ENTER para salir: ', end='')
 
     def display_finish_message(self):
-        print('Presione ENTER para continuar: ', end='')
+        print('\n************************************\n')
+        print('Sandwich eliminado satisfactoriamente\n')
+        print('Desea eliminar otro Sandwich [s / n]: ', end='')
 
     def display_order(self ):
         x = self.__order.get_sandwiches()

@@ -157,17 +157,22 @@ class Controller(object):
                 self.view.display_empty()
                 self.view.display_empty_msg()
                 input()
-                self.order_menu()
+                return self.order_menu()
 
             self.view.display_request_message()
             
             opcion = input()
             if not opcion:
-                self.order_menu()
+                return self.order_menu()
 
             try:
                 if int(opcion) in range(1,len(order.get_sandwiches())+1):
                     order.remove_sandwich(int(opcion))
+                    self.view.display_finish_message()
+                    final_option = input().lower()
+                    if final_option == 's':
+                        return self.delete_sandwich()
+                    return self.order_menu()
                 else:
                     self.view.display_error_message()
             except ValueError:
@@ -179,3 +184,4 @@ class Controller(object):
         self.view.display_factura()
         self.view.display_finish_message()
         input()
+        return self.order_menu()
