@@ -102,9 +102,11 @@ class Controller(object):
 
         self.view.display_created_sandwich(self.model.get_current_sandwich())
         self.model.add_sandwich_to_order()
-        self.view.display_finish_message()
-        input()
-        self.order_menu()
+        
+        final_option = input().lower()
+        if final_option == 's':
+            return self.add_sandwich()
+        return self.order_menu()
 
     def clone_sandwich(self):
         sandwich_options = self.model.generate_sandwich_options_dict()
