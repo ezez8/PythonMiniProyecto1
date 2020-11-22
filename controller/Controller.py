@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import View,WelcomeView,OrderView,AddSandwichView,CloneSandwichView
+from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,CloneSandwichView,ShowOrderView,AddIngredientView
 from sys import exit
 
 class Controller(object):
@@ -70,7 +70,7 @@ class Controller(object):
         elif user_input == 'c':
             self.clone_sandwich()
         elif user_input == 'm':
-            self.welcome()
+            self.modify_sandwich()
         elif user_input == 'p':
             self.welcome()
         else:
@@ -85,7 +85,6 @@ class Controller(object):
                     return self.order_menu()
             return self.welcome()
             
-    
     def add_sandwich(self):
         ingredient_options = self.model.generate_available_ingredients_dict()
         size_options = self.model.generate_available_sizes_dict()
@@ -117,6 +116,78 @@ class Controller(object):
         if final_option == 's':
             return self.add_sandwich()
         return self.order_menu()
+    
+    def add_ingredient(self):
+        order = self.model.get_order()
+        self.__initiate_view(ShowOrderView.ShowOrderView(order))
+        while True:
+            try:
+                user_input = input()
+                if user_input == 'v':
+                    return self.modify_sandwich()
+                elif int(user_input) in range(1,len(order.get_sandwiches())+1):
+                    selected_sandwich = int(user_input)-1
+                    ingredient_options = self.model.generate_available_ingredients_dict()
+                    self.__initiate_view(AddIngredientView.AddIngredientView(ingredient_options))
+                    self.select_ingredient(selected_sandwich)
+                else:
+                    self.view.display_error_message()
+                    self.view.display_request_message()
+            except ValueError:
+                self.view.display_error_message()
+                self.view.display_request_message()
+                pass
+    
+    def select_ingredient(self,selected_sanwich):
+        ingredient_options = self.model.generate_available_ingredients_dict()
+        self.view.display_options_menu()
+        self.view.display_request_message()
+        user_wish_ingredient = True
+        while user_wish_ingredient:
+            ingredient_selected_option = input()
+            if ingredient_selected_option in ingredient_options:
+                self.model.add_ingredient_to_specific_sandwich(ingredient_selected_option,self.model.get_order().get_sandwiches()[selected_sanwich])
+                self.view.display_request_ingredient_message()
+            elif ingredient_selected_option == '':
+                user_wish_ingredient = False
+            else:
+                self.view.display_error_message()
+                self.view.display_request_ingredient_message()
+        self.view.display_result()
+        self.view.display_new_modification()
+        user_input = input()
+        if user_input == 's':
+            return self.modify_sandwich()
+        else:
+            return self.order_menu()
+
+
+    def delete_ingredient(self):
+        print("pruebas")
+
+    def modify_sandwich(self):
+        options = {'a' : 'Agregar Ingrediente','q' : 'Quitar Ingrediente','m' : 'Modificar Tamaño','s' : 'Salir'}
+        order = self.model.get_order()
+        self.__initiate_view(ModifySandwichView.ModifySandwichView(options))
+        if len(order.get_sandwiches()) == 0 :
+            self.view.display_empty()
+            input()
+            return self.order_menu()
+        else:
+            self.view.display_options_menu()
+            self.view.display_request_message()
+            user_input = input()
+            if user_input == 'a':
+                return self.add_ingredient()
+            elif user_input == 'q':
+                return self.delete_ingredient()
+            elif user_input == 'm':
+                return self.welcome()
+            elif user_input == 's':
+                return self.order_menu()
+            else:
+                return self.order_menu()
+            
 
     def clone_sandwich(self):
         sandwich_options = self.model.generate_sandwich_options_dict()

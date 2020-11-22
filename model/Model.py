@@ -12,6 +12,9 @@ class Model(object):
         self.__order = Order()
         self.__current_sandwich = None
         self.__current_ingredient = None
+
+    def get_order(self):
+        return self.__order
     
     def get_available_ingredients(self):
         return self.__available_ingredients
@@ -107,6 +110,9 @@ class Model(object):
 
     def add_ingredient_to_sandwich(self, ingredient_command : str):
         self.__current_sandwich.add_ingredient(self.__search_available_ingredient_by_command(ingredient_command))
+
+    def add_ingredient_to_specific_sandwich(self, ingredient_command:str, sandwich: Sandwich):
+        sandwich.add_ingredient(self.__search_available_ingredient_by_command(ingredient_command))
 
     def obtain_total_price(self):
         return self.__order.calculate_order_price()
