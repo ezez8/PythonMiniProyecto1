@@ -20,10 +20,14 @@ class ShowOrderView(View):
     def display_empty(self):
         print('=> No hay ordenes existentes para modificar \n')
 
+    def display_back_message(self):
+        print('( v ) Volver al menu de modificar \n')
+
     def start_display(self):
         self.clean_screen()
         self.display_main_message()
         self.display_order()
+        self.display_back_message()
         self.display_request_message()
 
     def display_order(self):

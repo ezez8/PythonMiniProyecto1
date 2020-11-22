@@ -18,13 +18,11 @@ class ModifySandwichView(View):
         print('=> Debe ingresar una opcion valida')
 
     def display_empty(self):
-        print('=> No hay ordenes existentes para modificar \n')
+        print('=> No hay ordenes existentes para modificar (enter para terminar): ', end='')
 
     def start_display(self):
         self.clean_screen()
         self.display_main_message()
-        self.display_options_menu()
-        self.display_request_message()
 
     def display_options_menu(self):
         super().display_options_menu()
