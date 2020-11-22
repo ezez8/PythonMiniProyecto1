@@ -1,7 +1,7 @@
 from view.View import View
 from model.Order import Order
 
-class PagoView(View):
+class PaymentView(View):
     def __init__(self, order: Order):
         self.__order = order
 
@@ -30,7 +30,16 @@ class PagoView(View):
             print('*{sandwich_des:31.31}...{price:>25.2f}$*'.format(sandwich_des=sandwich_des, price=price))
         print('*'*62)
         print('*Total{total:>54.2f}$*'.format(total=self.__order.calculate_order_price()))
-        print('*'*62)
+        print('*'*62+'\n')
+
+    def order_empty(self):
+        print('**La orden esta vacia**')
+
+    def display_payment_confirmation(self):
+        print('Desea efectuar el pago? [s / n]: ', end='')
+
+    def display_success_payment(self):
+        print('\n**Gracias por su compra. Vuelva pronto**')
 
     def display_finish_message(self):
-        print('Presione ENTER para continuar: ', end='')
+        print('\nPresione ENTER para continuar: ', end='')
