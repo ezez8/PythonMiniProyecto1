@@ -2,8 +2,7 @@ from view.View import View
 from model import *
 
 class AddIngredientView(View):
-    def __init__(self, order: Order,ingredient_options: dict):
-        self.__order = order
+    def __init__(self, ingredient_options: dict):
         super().__init__(ingredient_options)
 
     def display_main_message(self):
@@ -34,5 +33,5 @@ class AddIngredientView(View):
         print('************************************')
 
     def display_new_modification(self):
-        print(f'\n¿Desea seguir modificando la orden? (s/n)\n')
+        print(f'\n¿Desea seguir modificando la orden? [s / n]: ', end='') 
 
