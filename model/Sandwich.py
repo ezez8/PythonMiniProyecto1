@@ -34,6 +34,9 @@ class Sandwich(object):
     def remove_ingredient(self, command : str):
         self.ingredients_list.remove(command)
 
+    def modify_size(self, size: Size):
+        self.size = size
+
     def calculate_price(self):
         price = self.size.price if self.size else 0
         for ingredient in self.ingredients_list:
