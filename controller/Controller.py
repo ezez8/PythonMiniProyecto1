@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,CloneSandwichView,ShowOrderView,AddIngredientView
+from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,CloneSandwichView,ShowOrderView,AddIngredientView,DeleteSandwichView,PaymentView
 from sys import exit
 
 class Controller(object):
@@ -66,13 +66,13 @@ class Controller(object):
         if user_input == 'a':
             self.add_sandwich()
         elif user_input == 'e':
-            self.welcome()
+            self.delete_sandwich()
         elif user_input == 'c':
             self.clone_sandwich()
         elif user_input == 'm':
             self.modify_sandwich()
         elif user_input == 'p':
-            self.welcome()
+            self.payment()
         else:
             number_sandwich = self.model.get_number_sandwich_order()
             if number_sandwich > 0:
@@ -218,5 +218,57 @@ class Controller(object):
     def end_program(self):
         exit()
 
+    def delete_sandwich(self):
+        order = self.model.get_order()
+        self.__initiate_view(DeleteSandwichView.DeleteSandwichView(order))
+        while True:
+            self.view.clean_screen()    
 
+            self.view.display_main_message()                 
 
+            if not len(order.get_sandwiches()):
+                self.view.display_empty()
+                break
+
+            self.view.display_order()   
+            self.view.display_request_message()
+            
+            opcion = input()
+            if not opcion:
+                break
+
+            try:
+                if int(opcion) in range(1,len(order.get_sandwiches())+1):
+                    order.remove_sandwich(int(opcion))
+                    self.view.display_success_message()
+                    self.view.display_delete_other_confirmation()
+                    final_option = input().lower()
+                    if final_option == 's':
+                        self.delete_sandwich()
+                    break
+                else:
+                    self.view.display_error_message()
+            except ValueError:
+                self.view.display_error_message()
+            self.view.display_continue_message()
+            input()
+
+        self.view.display_finish_message()
+        input()
+        self.order_menu()
+
+    def payment(self):
+        order = self.model.get_order()
+        self.__initiate_view(PaymentView.PaymentView(order))
+        if order.get_number_of_sandwiches():
+            self.view.display_factura()
+            self.view.display_payment_confirmation()
+            opcion = input().lower()
+            if opcion == 's':
+                self.view.display_success_payment()
+                self.model.reset_order()
+        else:
+            self.view.order_empty()
+        self.view.display_finish_message()
+        input()
+        self.order_menu()
