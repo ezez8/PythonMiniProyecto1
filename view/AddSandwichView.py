@@ -14,10 +14,8 @@ class AddSandwichView(View):
         print()
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Creacion de sandwich\n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('CREACION DE SANDWICH')+'***\n')
     
     def start_display(self):
         self.clean_screen()

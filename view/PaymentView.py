@@ -16,10 +16,8 @@ class PaymentView(View):
         print('=> Debe ingresar una opcion valida')
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Pago Sandwich\n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('PAGO DE ORDENES')+'***\n')
 
     def display_factura(self):
         print('*'*62)

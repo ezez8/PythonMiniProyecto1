@@ -6,10 +6,8 @@ class DeleteSandwichView(View):
         self.__order = order
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Eliminar Sandwich')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('ELIMINAR SANDWICH')+'***\n')
 
     def start_display(self):
         self.clean_screen()

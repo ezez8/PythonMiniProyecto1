@@ -5,10 +5,8 @@ class OrderView(View):
         super().__init__(options)
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Creacion de ordenes:\n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('CREACION DE ORDENES')+'***\n')
 
     def display_request_message(self):
         print('Indique la opcion con que desea continuar: ', end='')

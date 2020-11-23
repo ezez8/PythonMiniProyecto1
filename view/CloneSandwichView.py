@@ -7,10 +7,8 @@ class CloneSandwichView(View):
         super().__init__(options)
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Clonar sandwich:\n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('CLONAR SANDWICH')+'***\n')
     
     def start_display(self):
         self.clean_screen()
@@ -36,9 +34,7 @@ class CloneSandwichView(View):
         print('Indique cuantas copias del sandwich desea agregar (n > 0): ',end='')
 
     def display_empty(self):
-        print('\nNo se encuentran sandwiches en la orden para clonar')
-        print('Favor agregar un sandwich primero')
-        print('************************************')
+        print('\n**No se encuentran sandwiches en la orden para clonar**')
         print('\nPresione ENTER para continuar: ', end='')
 
     def display_options_menu(self):

@@ -21,6 +21,12 @@ class View(ABC):
             print(f'( {command} )    {option}')
         print()
     
+    def display_main_message(self):
+        print('*'*62)
+        print('*'+'{:^60}'.format('SANDWICHES UCAB')+'*')
+        print('*'*62)
+        print()
+    
     def start_display(self):
         self.clean_screen()
         self.display_main_message()

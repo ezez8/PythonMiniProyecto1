@@ -6,10 +6,8 @@ class ModifySandwichView(View):
         self.options = options
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Modificacion de sandwich\n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('MODIFICAR SANDWICH')+'***\n')
 
     def display_request_message(self):
         print('Indique el sandwich que desea modificar: ', end='')

@@ -6,10 +6,8 @@ class AddIngredientView(View):
         super().__init__(ingredient_options)
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Agregar ingrediente a un sandwich\n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('AGREGAR INGREDIENTE A UN SANDWICH')+'***\n')
 
     def display_request_message(self):
         print('Indique el ingrediente que desea añadir: ', end='')

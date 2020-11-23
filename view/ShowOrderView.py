@@ -6,10 +6,8 @@ class ShowOrderView(View):
         self.__order = order
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Orden de Sandwich: \n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('SANDWICH(ES) EN LA ORDEN')+'***\n')
 
     def display_request_message(self):
         print('Indique el sandwich que desea modificar: ', end='')
