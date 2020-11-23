@@ -15,7 +15,7 @@ class DeleteIngredientView(View):
         print('Indique el ingrediente que desea eliminar: ', end='')
 
     def display_negation_message(self):
-        print('El sandwich no puede tener menos de un ingrediente (ENTER para volver al menu anterior)', end='')
+        print('El sandwich no tiene ingredientes (ENTER para continuar)', end='')
 
     def display_error_message(self):
         print('=> Debe ingresar una opcion valida')
@@ -36,5 +36,5 @@ class DeleteIngredientView(View):
         print('************************************')
 
     def display_new_modification(self):
-        print(f'\n¿Desea seguir modificando el sandwich? [s / n]: ', end='') 
+        print(f'\n¿Desea eliminar otro ingrediente del sandiwch? [s / n]: ', end='') 
 

@@ -187,10 +187,10 @@ class Controller(object):
         
         self.__initiate_view(DeleteIngredientView.DeleteIngredientView(finals))
         self.view.display_options_menu()
-        if len(finals) == 1:
+        if len(finals) == 0:
             self.view.display_negation_message()
             input()
-            self.selected_sandwich_disply()
+            self.modify_sandwich()
             
         self.view.display_request_message()
         
@@ -212,7 +212,7 @@ class Controller(object):
         if user_input == 's':
             return self.delete_ingredient( mod_sandwich )
         else:
-            return self.selected_sandwich_disply()
+            return self.modify_sandwich()
                     
     def modify_size(self):
         order = self.model.get_order()
@@ -226,7 +226,6 @@ class Controller(object):
                 
                 mod_sandwich = self.model.get_order().get_sandwiches()[selected_sandwich]
                 size_left = self.model.generate_available_sizes_dict()
-                size_left.pop(mod_sandwich.size.command)
 
                 self.__initiate_view(ModifySizeView.ModifySizeView(size_left))
                 self.view.display_options_menu()
@@ -248,7 +247,7 @@ class Controller(object):
                 self.view.display_new_modification()
                 user_input = input()
                 if user_input == 's':
-                    return self.modify_size()
+                    return self.modify_sandwich()
                 else:
                     return self.order_menu()
 
