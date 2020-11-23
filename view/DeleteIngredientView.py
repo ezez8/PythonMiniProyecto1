@@ -36,5 +36,5 @@ class DeleteIngredientView(View):
         print('************************************')
 
     def display_new_modification(self):
-        print(f'\n¿Desea seguir modificando la orden? [s / n]: ', end='') 
+        print(f'\n¿Desea seguir modificando el sandwich? [s / n]: ', end='') 
 
