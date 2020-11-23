@@ -186,12 +186,14 @@ class Controller(object):
                 finals[ing] = ingredient_options[ing]
         
         self.__initiate_view(DeleteIngredientView.DeleteIngredientView(finals))
-        self.view.display_options_menu()
+
         if len(finals) == 0:
+            self.view.display_empty()
             self.view.display_negation_message()
             input()
-            self.modify_sandwich()
-            
+            return self.modify_sandwich()
+
+        self.view.display_options_menu()
         self.view.display_request_message()
         
         user_wish_ingredient = True
