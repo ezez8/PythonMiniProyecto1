@@ -1,5 +1,5 @@
 from model.Model import Model
-from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,CloneSandwichView,ShowOrderView,AddIngredientView,DeleteSandwichView,PaymentView
+from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,CloneSandwichView,ShowOrderView,AddIngredientView,DeleteSandwichView,PaymentView,DeleteIngredientView,ModifySizeView
 from sys import exit
 
 class Controller(object):
@@ -161,9 +161,98 @@ class Controller(object):
         else:
             return self.order_menu()
 
+    
+    def selected_sandwich_disply(self):
+        order = self.model.get_order()
+        self.__initiate_view(ShowOrderView.ShowOrderView(order))
+        while True:
+            user_input = input()
+            if user_input == 'v':
+                return self.modify_sandwich()
+            elif int(user_input) in range(1,len(order.get_sandwiches())+1):
+                selected_sandwich = int(user_input)-1
+                mod_sandwich = self.model.get_order().get_sandwiches()[selected_sandwich]
+                
+                self.delete_ingredient(mod_sandwich)
 
-    def delete_ingredient(self):
-        print("pruebas")
+
+    def delete_ingredient(self, mod_sandwich):
+
+        sandwich_ingredient = mod_sandwich.get_ingredient()
+        ingredient_options = self.model.generate_available_ingredients_dict()
+        finals = {}
+        for ing in ingredient_options:
+            if ingredient_options[ing] in [s.name for s in sandwich_ingredient]:
+                finals[ing] = ingredient_options[ing]
+        
+        self.__initiate_view(DeleteIngredientView.DeleteIngredientView(finals))
+
+        if len(finals) == 0:
+            self.view.display_empty()
+            self.view.display_negation_message()
+            input()
+            return self.modify_sandwich()
+
+        self.view.display_options_menu()
+        self.view.display_request_message()
+        
+        user_wish_ingredient = True
+        while user_wish_ingredient:
+            ingredient_selected_option = input()
+            if ingredient_selected_option in finals:
+                self.model.delete_ingredient_to_specific_sandwich(ingredient_selected_option, mod_sandwich)
+                user_wish_ingredient = False
+            elif ingredient_selected_option == '':
+                user_wish_ingredient = False
+
+            else:
+                self.view.display_error_message()
+                self.view.display_request_ingredient_message()
+        self.view.display_result()
+        self.view.display_new_modification()
+        user_input = input()
+        if user_input == 's':
+            return self.delete_ingredient( mod_sandwich )
+        else:
+            return self.modify_sandwich()
+                    
+    def modify_size(self):
+        order = self.model.get_order()
+        self.__initiate_view(ShowOrderView.ShowOrderView(order))
+        while True:
+            user_input = input()
+            if user_input == 'v':
+                return self.modify_sandwich()
+            elif int(user_input) in range(1,len(order.get_sandwiches())+1):
+                selected_sandwich = int(user_input)-1
+                
+                mod_sandwich = self.model.get_order().get_sandwiches()[selected_sandwich]
+                size_left = self.model.generate_available_sizes_dict()
+
+                self.__initiate_view(ModifySizeView.ModifySizeView(size_left))
+                self.view.display_options_menu()
+                self.view.display_request_message()
+
+                user_wish_ingredient = True
+
+                while user_wish_ingredient:
+                    size_selected_option = input()
+                    if size_selected_option in size_left:
+                        self.model.modify_size_to_specific_sandwich(size_selected_option, mod_sandwich)
+                        user_wish_ingredient = False
+                    elif size_selected_option == '':
+                        user_wish_ingredient = False
+                    else:
+                        self.view.display_error_message()
+                        self.view.display_request_ingredient_message()
+                self.view.display_result()
+                self.view.display_new_modification()
+                user_input = input()
+                if user_input == 's':
+                    return self.modify_sandwich()
+                else:
+                    return self.order_menu()
+
 
     def modify_sandwich(self):
         options = {'a' : 'Agregar Ingrediente','q' : 'Quitar Ingrediente','m' : 'Modificar Tamaño','s' : 'Salir'}
@@ -180,9 +269,9 @@ class Controller(object):
             if user_input == 'a':
                 return self.add_ingredient()
             elif user_input == 'q':
-                return self.delete_ingredient()
+                return self.selected_sandwich_disply()
             elif user_input == 'm':
-                return self.welcome()
+                return self.modify_size()
             elif user_input == 's':
                 return self.order_menu()
             else:

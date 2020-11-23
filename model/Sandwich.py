@@ -21,6 +21,9 @@ class Sandwich(object):
     def ingredients_list(self):
         return self.__ingredients_list
     
+    def get_ingredient(self):
+        return self.__ingredients_list
+    
     @ingredients_list.setter
     def ingredients_list(self, value : list):
         self.__ingredients_list =  value
@@ -29,7 +32,10 @@ class Sandwich(object):
         self.ingredients_list.append(ingredient)
     
     def remove_ingredient(self, command : str):
-        pass
+        self.ingredients_list.remove(command)
+
+    def modify_size(self, size: Size):
+        self.size = size
 
     def calculate_price(self):
         price = self.size.price if self.size else 0
