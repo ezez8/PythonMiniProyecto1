@@ -113,6 +113,9 @@ class Model(object):
 
     def add_ingredient_to_specific_sandwich(self, ingredient_command:str, sandwich: Sandwich):
         sandwich.add_ingredient(self.__search_available_ingredient_by_command(ingredient_command))
+    
+    def delete_ingredient_to_specific_sandwich(self, ingredient_command:str, sandwich: Sandwich):
+        sandwich.remove_ingredient(self.__search_available_ingredient_by_command(ingredient_command))
 
     def obtain_total_price(self):
         return self.__order.calculate_order_price()
