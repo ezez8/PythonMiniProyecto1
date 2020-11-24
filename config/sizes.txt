@@ -1,0 +1,3 @@
+Triple t 580
+Doble d 430
+Individual i 280
