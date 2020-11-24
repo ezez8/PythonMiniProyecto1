@@ -8,7 +8,7 @@ class AddSandwichView(View):
         super().__init__(ingredient_options)
     
     def display_size_options(self):
-        print('\nTamaños :')
+        print('\nTamaños diponibles :\n')
         for command,name in self.size_options.items():
             print(f'( {command} )    {name}')
         print()
@@ -41,8 +41,8 @@ class AddSandwichView(View):
     
     def display_created_sandwich(self, sandwich : Sandwich):
         print(f'\nUsted seleccionó un sándwich {sandwich.get_full_description()}\n')
-        print(f'Subtotal a pagar por el sándwich {sandwich.get_small_description()}: {sandwich.calculate_price() : .2f}')
-        print('\n************************************')
-        print('¿Desea agregar otro sándwich a la orden [s / n]?: ',end='')
+        print(f'Subtotal a pagar por el sándwich {sandwich.get_small_description()}: {sandwich.calculate_price() : .2f}\n')
+        print('*'*62)
+        print('\n¿Desea agregar otro sándwich a la orden [s / n]?: ',end='')
 
     
