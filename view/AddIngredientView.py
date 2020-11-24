@@ -1,21 +1,18 @@
 from view.View import View
-from model import *
 
 class AddIngredientView(View):
     def __init__(self, ingredient_options: dict):
         super().__init__(ingredient_options)
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Agregar ingrediente a un sandwich\n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('AGREGAR INGREDIENTE A UN SÁNDWICH')+'***\n')
 
     def display_request_message(self):
         print('Indique el ingrediente que desea añadir: ', end='')
 
     def display_error_message(self):
-        print('=> Debe ingresar una opcion valida')
+        print('=> Debe ingresar una opción valida')
 
     def display_request_ingredient_message(self):
         print('Indique ingrediente (enter para terminar): ', end='')
@@ -33,5 +30,5 @@ class AddIngredientView(View):
         print('************************************')
 
     def display_new_modification(self):
-        print(f'\n¿Desea seguir modificando la orden? [s / n]: ', end='') 
+        print(f'\n¿Desea seguir agregando ingredientes al sandwich? [s / n]: ', end='') 
 

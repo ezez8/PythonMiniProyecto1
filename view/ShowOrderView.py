@@ -6,22 +6,20 @@ class ShowOrderView(View):
         self.__order = order
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Orden de Sandwich: \n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('SANDWICH(ES) EN LA ORDEN')+'***\n')
 
     def display_request_message(self):
         print('Indique el sandwich que desea modificar: ', end='')
 
     def display_error_message(self):
-        print('=> Debe ingresar una opcion valida')
+        print('=> Debe ingresar una opción válida')
 
     def display_empty(self):
         print('=> No hay ordenes existentes para modificar \n')
 
     def display_back_message(self):
-        print('( v ) Volver al menu de modificar \n')
+        print('( v ) Volver al menu de modificar\n')
 
     def start_display(self):
         self.clean_screen()
@@ -34,5 +32,5 @@ class ShowOrderView(View):
         count = 1
         order = self.__order.get_sandwiches()
         for sandwich in order:
-            print(f'( {count} ) sandwich {sandwich.get_full_description()}\n')
+            print(f'( {count} ) Sándwich {sandwich.get_full_description()}')
             count += 1

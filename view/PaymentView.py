@@ -10,16 +10,14 @@ class PaymentView(View):
         self.display_main_message()
     
     def display_request_message(self):
-        print('Indique una opcion para continuar (ENTER para volver al menu): ', end='')
+        print('Indique una opción para continuar (ENTER para volver al menu): ', end='')
 
     def display_error_message(self):
-        print('=> Debe ingresar una opcion valida')
+        print('=> Debe ingresar una opción válida')
 
     def display_main_message(self):
-        print('**************************')
-        print('*     SANDWICHES UCAB    *')
-        print('**************************\n')
-        print('Pago Sandwich\n')
+        super().display_main_message()
+        print('***'+'{:^56}'.format('PAGO DE ORDENES')+'***\n')
 
     def display_factura(self):
         print('*'*62)
@@ -27,16 +25,16 @@ class PaymentView(View):
         print('*'*62)
         sandwiches_list = [(s.get_full_description(),s.calculate_price()) for s in self.__order.get_sandwiches()]
         for sandwich_des, price in sandwiches_list:            
-            print('*{sandwich_des:31.31}...{price:>25.2f}$*'.format(sandwich_des=sandwich_des, price=price))
+            print('*{sandwich_des:41.31}...{price:>15.2f}$*'.format(sandwich_des=sandwich_des, price=price))
         print('*'*62)
-        print('*Total{total:>54.2f}$*'.format(total=self.__order.calculate_order_price()))
+        print('*{total_str:41.31}...{total_amount:>15.2f}$*'.format(total_str='Total', total_amount=self.__order.calculate_order_price()))
         print('*'*62+'\n')
 
     def order_empty(self):
-        print('**La orden esta vacia**')
+        print('**La orden esta vacía**')
 
     def display_payment_confirmation(self):
-        print('Desea efectuar el pago? [s / n]: ', end='')
+        print('¿Desea efectuar el pago? [s / n]: ', end='')
 
     def display_success_payment(self):
         print('\n**Gracias por su compra. Vuelva pronto**')
