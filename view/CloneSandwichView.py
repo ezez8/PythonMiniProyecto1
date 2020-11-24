@@ -1,6 +1,4 @@
 from view.View import View
-from model.Order import Order
-
 
 class CloneSandwichView(View):
     def __init__(self, options: dict):
@@ -8,7 +6,7 @@ class CloneSandwichView(View):
 
     def display_main_message(self):
         super().display_main_message()
-        print('***'+'{:^56}'.format('CLONAR SANDWICH')+'***\n')
+        print('***'+'{:^56}'.format('CLONAR SÁNDWICH')+'***\n')
     
     def start_display(self):
         self.clean_screen()
@@ -20,22 +18,22 @@ class CloneSandwichView(View):
             self.display_request_message()
 
     def display_request_message(self):
-        print('Indique el numero del sandwich que desea clonar: ', end='')
+        print('Indique el número del sándwich que desea clonar: ', end='')
 
     def display_error_message(self):
-        print('=> Debe ingresar una opcion valida')
+        print('=> Debe ingresar una opción válida')
     
     def display_finish_message(self):
-        print('\nClonacion exitosa\n', end='')
-        print('************************************')
+        print('\nClonación exitosa\n', end='')
+        print('*'*62)
         print('\nPresione ENTER para continuar: ', end='')
     
     def display_request_quantity(self):
-        print('Indique cuantas copias del sandwich desea agregar (n > 0): ',end='')
+        print('Indique cuantas copias del sándwich desea agregar (n > 0): ',end='')
 
     def display_empty(self):
-        print('\n**No se encuentran sandwiches en la orden para clonar**')
-        print('\nPresione ENTER para continuar: ', end='')
+        print('\n**No existen sandwiches en la orden para clonar**')
+        print('\nPresione ENTER para salir: ', end='')
 
     def display_options_menu(self):
         for command,option in self.options.items():

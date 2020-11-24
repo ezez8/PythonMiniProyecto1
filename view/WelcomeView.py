@@ -9,8 +9,8 @@ class WelcomeView(View):
         print('***'+'{:^56}'.format('MENU PRINCIPAL')+'***\n')
 
     def display_request_message(self):
-        print('Indique la opcion con que desea continuar: ', end='')
+        print('Indique la opción con que desea continuar: ', end='')
 
     def display_error_message(self):
-        print('=> Debe ingresar una opcion valida')
+        print('=> Debe ingresar una opción válida')
     

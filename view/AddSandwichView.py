@@ -1,6 +1,5 @@
 from view.View import View
 from model.Sandwich import Sandwich
-from model.Size import Size
 
 class AddSandwichView(View):
     def __init__(self, ingredient_options: dict, size_options: dict):
@@ -15,7 +14,7 @@ class AddSandwichView(View):
 
     def display_main_message(self):
         super().display_main_message()
-        print('***'+'{:^56}'.format('CREACION DE SANDWICH')+'***\n')
+        print('***'+'{:^56}'.format('CREACIÓN DE SÁNDWICH')+'***\n')
     
     def start_display(self):
         self.clean_screen()
@@ -24,16 +23,16 @@ class AddSandwichView(View):
         self.display_request_message()
 
     def display_request_message(self):
-        print('Indique una opcion para continuar: ', end='')
+        print('Indique una opción para continuar: ', end='')
     
     def display_request_ingredient_message(self):
-        print('Indique ingrediente (enter para terminar): ', end='')
+        print('Indique ingrediente (ENTER para terminar): ', end='')
     
     def display_finish_message(self):
         print('Presione ENTER para continuar: ', end='')
 
     def display_error_message(self):
-        print('=> Debe ingresar una opcion valida')
+        print('=> Debe ingresar una opción válida')
 
     def display_options_menu(self):
         print('\nLista de Ingredientes:\n')

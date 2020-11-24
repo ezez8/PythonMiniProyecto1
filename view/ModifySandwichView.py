@@ -1,5 +1,4 @@
 from view.View import View
-from model import *
 
 class ModifySandwichView(View):
     def __init__(self, options : dict):
@@ -7,16 +6,17 @@ class ModifySandwichView(View):
 
     def display_main_message(self):
         super().display_main_message()
-        print('***'+'{:^56}'.format('MODIFICAR SANDWICH')+'***\n')
+        print('***'+'{:^56}'.format('MODIFICAR SÁNDWICH')+'***\n')
 
     def display_request_message(self):
-        print('Indique el sandwich que desea modificar: ', end='')
+        print('Indique la opción con que desea continuar: ', end='')
 
     def display_error_message(self):
-        print('=> Debe ingresar una opcion valida')
+        print('=> Debe ingresar una opción valida')
 
     def display_empty(self):
-        print('=> No hay ordenes existentes para modificar (enter para terminar): ', end='')
+        print('**No existen sandwiches en la orden para modificar**\n', end='')
+        print('\nPresione ENTER para salir: ', end='')
 
     def start_display(self):
         self.clean_screen()
@@ -29,5 +29,5 @@ class ModifySandwichView(View):
         count = 1
         order = self.__order.get_sandwiches()
         for sandwich in order:
-            print(f'( {count} ) sandwich {sandwich.get_full_description()}\n')
+            print(f'( {count} ) Sándwich {sandwich.get_full_description()}\n')
             count += 1
