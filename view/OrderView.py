@@ -1,6 +1,29 @@
 from view.View import View
 
 class OrderView(View):
+    """
+    Clase utilizada para representar la lista de funcionalidades de la creación de ordenes
+
+    ...
+    Superclass
+    ----------
+    View
+
+    Attributes
+    ----------
+
+    Methods
+    -------
+    display_main_message():
+        Muestra el encabezado de la vista
+    display_request_message():
+        Muestra el mensaje de solicitud de ingreso de opción
+    display_error_message():
+        Muestra mensaje de error al ingresar una opción inválidaón
+    display_request_exit_conformation():
+        Muestra mensje solicitando confirmación de salida del menu de opciones
+
+    """
     def __init__(self, options: dict):
         super().__init__(options)
 

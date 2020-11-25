@@ -2,6 +2,43 @@ from view.View import View
 from model.Order import Order
 
 class DeleteSandwichView(View):
+    """
+    Clase utilizada para representar la vista en la funcionalidad de remover ingredientes
+
+    ...
+    Superclass
+    ----------
+    View
+
+    Attributes
+    ----------
+    Order:
+        Contiene los datos de la orden del cliente
+
+    Methods
+    -------
+    display_main_message():
+        Muestra el encabezado de la vista
+    display_request_message():
+        Muestra el mensaje de solicitud de ingreso de opción
+    display_error_message():
+        Muestra mensaje de error al ingresar una opción inválida
+    display_finish_message():
+        Muestra mensaje de culminación de la operación
+    display_continue_message():
+        Muesta mensaje de solicitud de permiso para continuar
+    start_display():
+        Inicia la vista
+    display_empty():
+        Muestra mendaje indicando que la funcionalidad esta bloqueda
+    display_success_message()
+        Muestra mesjade de exito de la operación
+    display_delete_other_confirmation()
+        Muesta mensaje de solicitud para continuar eliminando sandwiches a la orden
+    display_order()
+        Muertra la lista de sandwiches que conforman la orden
+
+    """
     def __init__(self, order: Order):
         self.__order = order
 
