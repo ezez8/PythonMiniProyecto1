@@ -9,10 +9,10 @@ class Application:
     Modelo-Vista-Controlador (MVC)
 
     Desarrollades:
+    Venencia Saurith, Yeisson
     Bogoljubskij Hernandéz, Maximiliano
     Carbajales Di Cosola, Roberto
     Montero Pantano, Ezequiel
-    Venencia Saurith, Yeisson
 
     """
     def run(self):
