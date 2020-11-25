@@ -47,4 +47,4 @@ Este producto fue desarrollado gracias al esfuerzo de las siguientes personas :
 
 # Contacto
 
-Para mayor informacion a cerca de las tecnicas y metodologias de desarrollo del producto, contatar con alguno de los desarrolladores a traves de la plataforma <a href="https://github.com/" target="blank"><strong>Github</strong></a>
+Para mayor información acerca de las técnicas y metodologías de desarrollo del producto, contatar con alguno de los desarrolladores a traves de la plataforma <a href="https://github.com/" target="blank"><strong>Github</strong></a>
