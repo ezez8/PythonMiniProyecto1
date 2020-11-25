@@ -2,6 +2,37 @@ from view.View import View
 from model import *
 
 class ShowOrderView(View):
+    """
+    Clase utilizada para representar la lista de sandwiches que contiene la orden
+
+    ...
+    Superclass
+    ----------
+    View
+
+    Attributes
+    ----------
+    order : Order
+        Contiene información del detalle de la orden
+
+    Methods
+    -------
+    display_main_message():
+        Muestra el encabezado de la vista
+    display_request_message():
+        Muestra el mensaje de solicitud de ingreso de opción
+    display_error_message():
+        Muestra mensaje de error al ingresar una opción inválidaón
+    start_display():
+        Inicia la vista
+    display_empty():
+        Muestra mendaje indicando que la funcionalidad esta bloqueda
+    display_back_message():
+        Muestra opción de retornar al menu de modificación de ordenes
+    display_order()
+        Muertra la lista de sandwiches que conforman la orden
+
+    """
     def __init__(self, order: Order):
         self.__order = order
 

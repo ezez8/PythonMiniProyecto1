@@ -3,6 +3,59 @@ from view import View,WelcomeView,OrderView,AddSandwichView,ModifySandwichView,C
 from sys import exit
 
 class Controller(object):
+    """
+    Clase utilizada para representar el controlador de patron MVC
+
+    ...
+
+    Attributes
+    ----------
+    view : View
+        Vista actual del sistema
+    model: Model
+        Modelo del patron MVC
+
+    Methods
+    -------
+    view():
+        Getter del atributo view
+    view( value = View):
+        Setter del atributo view
+    model():
+        Getter del atributo model
+    model( value = Model):
+        Setter del atributo model
+    start():
+        Inicia la aplicacion, cargo la vista de bienvenida y los parametros de configuración al modelo
+    welcome():
+        Controlo las funcionalidades de la pantalla de bienvenida
+    order_menu():
+        Controla las funcionalidades del menu de creación de ordenes
+    add_sandwich():
+        Contrala la funcionalidad de agregar sandwiches a la orden
+    add_ingredient():
+        Contola la funcionalidad de agregar ingredientes a los sandwiches
+    select_ingredient(selected_sanwich):
+        Controla la funcionalidad de seleccion de ingredientes
+    selected_sandwich_disply():
+        Controla la funcionalidad de selección de sandwiches
+    delete_ingredient( mod_sandwich):
+        Controla la funcionalidad de remover ingredientes
+    modify_size():
+        Controla la funcionalidad de modificación de tamaño de sandwiches
+    change_size( selected_sandwich, size_options):
+        Función auxiliar en la funcionalidad de modificación de tamaño de sandwiches
+    modify_sandwich():
+        Controla las funcionalidades del menu de seleccion de sandwich
+    clone_sandwich():
+        Controla la funcionalidad de clonar sanwiches
+    end_program():
+        Finaliza el programa
+    delete_sandwich():
+        Controla la funcionalidad de eliminar sandwiches de la orden
+    payment():
+        Controla la funcionalidad de pagos de ordenes
+    """
 
     def __init__(self):
         self.view = None
@@ -10,21 +63,26 @@ class Controller(object):
     
     @property
     def view(self):
+        """Getter del atributo view"""
         return self.__view
     
     @view.setter
     def view(self, value : View):
+        """Setter del atributo view"""
         self.__view = value
     
     @property
     def model(self):
+        """Getter del atributo model"""
         return self.__model
     
     @model.setter
     def model(self, value : Model):
+        """Setter del atributo model"""
         self.__model = value
     
     def start(self):
+        """Inicia la aplicacion, cargo la vista de bienvenida y los parametros de configuración al modelo"""
         self.model = Model()
         self.model.load_available_ingredients()
         self.model.load_availables_sizes()
@@ -46,6 +104,7 @@ class Controller(object):
         self.view.start_display()
     
     def welcome(self):
+        """Controlo las funcionalidades de la pantalla de bienvenida"""
         options = {'c' : 'Crear nueva orden', 'q' : 'Salir'}
         self.__initiate_view(WelcomeView.WelcomeView(options))
 
@@ -57,6 +116,7 @@ class Controller(object):
             return self.end_program()
         
     def order_menu(self):
+        """Controlo las funcionalidades la creción de ordernes"""
         options = {'a' : 'Agregar Sandwich','e' : 'Eliminar Sandwich','c' : 'Clonar Sandwich','m' : 'Modificar Sandwich','p' : 'Pagar','q' : 'Salir'}
         self.__initiate_view(OrderView.OrderView(options))
 
@@ -85,6 +145,7 @@ class Controller(object):
             return self.welcome()
             
     def add_sandwich(self):
+        """Controlo la funcionalidad de agregar sadwiches"""
         ingredient_options = self.model.generate_available_ingredients_dict()
         size_options = self.model.generate_available_sizes_dict()
         self.__initiate_view(AddSandwichView.AddSandwichView(ingredient_options,size_options))
@@ -117,6 +178,7 @@ class Controller(object):
         return self.order_menu()
     
     def add_ingredient(self):
+        """Controlo las funcionalidad de agragar ingredients"""
         order = self.model.get_order()
         self.__initiate_view(ShowOrderView.ShowOrderView(order))
         while True:
@@ -137,6 +199,7 @@ class Controller(object):
                 self.view.display_request_message()
     
     def select_ingredient(self,selected_sanwich):
+        """Controlo las funcionalidad de sellción de ingredientes"""
         ingredient_options = self.model.generate_available_ingredients_dict()
         self.view.start_display()
         self.view.display_options_menu()
@@ -161,6 +224,7 @@ class Controller(object):
             return self.modify_sandwich()
 
     def selected_sandwich_disply(self):
+        """Controlo las funcionalidad de seleccion de sandwiches"""
         order = self.model.get_order()
         self.__initiate_view(ShowOrderView.ShowOrderView(order))
         while True:
@@ -180,6 +244,7 @@ class Controller(object):
                 self.view.display_request_message()            
 
     def delete_ingredient(self, mod_sandwich):
+        """Controlo las funcionalidades de eliminar ingredietes de sandwiches"""
         sandwich_ingredient = mod_sandwich.get_ingredient()
         ingredient_options = self.model.generate_available_ingredients_dict()
         finals = {}
@@ -218,6 +283,7 @@ class Controller(object):
             return self.modify_sandwich()
                     
     def modify_size(self):
+        """controla la funcionalidad de modificación de tamaño de sandwiches"""
         order = self.model.get_order()
         self.__initiate_view(ShowOrderView.ShowOrderView(order))
         while True:
@@ -242,6 +308,7 @@ class Controller(object):
             
 
     def change_size(self, selected_sandwich, size_options):
+        """funcion auxiliar para la modificación de tamaño de sandwiches"""
         self.view.start_display()
         self.view.display_options_menu()
         self.view.display_request_message()
@@ -267,6 +334,7 @@ class Controller(object):
             return self.modify_sandwich()
 
     def modify_sandwich(self):
+        """Controla las funciones del menu de modificacion de orderdenes"""
         options = {'a' : 'Agregar Ingrediente','r' : 'Remover Ingrediente','m' : 'Modificar Tamaño','q' : 'Salir'}
         order = self.model.get_order()
         self.__initiate_view(ModifySandwichView.ModifySandwichView(options))
@@ -288,6 +356,7 @@ class Controller(object):
                 return self.order_menu()
             
     def clone_sandwich(self):
+        """Controla la funcionalidad de clonación de sandwiches"""
         sandwich_options = self.model.generate_sandwich_options_dict()
         self.__initiate_view(CloneSandwichView.CloneSandwichView(sandwich_options))
 
@@ -314,9 +383,11 @@ class Controller(object):
         return self.order_menu()
 
     def end_program(self):
+        """Finaliza la aplicación"""
         exit()
 
     def delete_sandwich(self):
+        """Controla la funcionalidad de eliminar sandwiches de la orden"""
         order = self.model.get_order()
         self.__initiate_view(DeleteSandwichView.DeleteSandwichView(order))
 
@@ -354,6 +425,7 @@ class Controller(object):
             input()
 
     def payment(self):
+        """Controla la funcionalidad asociada al pago de la orden"""
         order = self.model.get_order()
         self.__initiate_view(PaymentView.PaymentView(order))
         if order.get_number_of_sandwiches():
