@@ -1,6 +1,37 @@
 from view.View import View
 
 class AddIngredientView(View):
+    """
+    Clase utilizada para representar la vista en la funcionalidad de agregación de ingredientes
+
+    ...
+    Superclass
+    ----------
+    View
+
+    Attributes
+    ----------
+    
+
+    Methods
+    -------
+    display_main_message():
+        Muestra el encabezado de la vista
+    display_request_message():
+        Muestra el mensaje de solicitud de ingreso de opción
+    display_error_message():
+        Muestra mensaje de error al ingresar una opción inválida
+    display_request_ingredient_message():
+        Muestra mensaje de solicitud de ingreso de ingredientes
+    start_display():
+        Inicia la vista
+    display_options_menu():
+        Muesta la lista de ingredientes
+    display_result():
+        Muesta mensaje de confirmación de exito de la operación
+    display_new_modification():
+        Muesta mensaje de solicitud de realizad de nuevo la operación
+    """
     def __init__(self, ingredient_options: dict):
         super().__init__(ingredient_options)
 
