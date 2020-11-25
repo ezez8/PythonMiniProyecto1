@@ -1,5 +1,7 @@
 # Sandwiches UCAB
 
+<img src="./assets/logo.png" alt="Logo" />
+
 El proyecto consiste en el desarrollo de una aplicación de línea de comando, desarrollada en Python, que permite a los usuarios tomar órdenes de <strong>pedidos conformados por sandwiches</strong>.
 
 Dentro de las <strong>principales funciones</strong> con que está dotada la aplicación resaltan el <strong>agregar sándwiches </strong>a la orden mediante la confección personalizada de los mismo, la <strong>modificación flexible</strong> de la orden y el <strong>proceso de pago</strong>.
